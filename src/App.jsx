@@ -1,5 +1,5 @@
 import './App.css'
-import NavBar from './Component/NavBar'
+
 import Bannar from './Component/Bannar' 
 import Today from './Component/Today' 
 import Catagories from './Component/Catagories'
@@ -15,10 +15,10 @@ import Navbar from './Component/NavBar'
 
 function App() {
 
- 
+
   return (
     <>
-      <Navbar/>
+     <Navbar/>
      <Bannar/>
      <Today/>
      <Catagories/>
@@ -27,8 +27,8 @@ function App() {
      <Product/>
      <NewArrivel/>
      <Serviceone/>
-     
-     
+
+
     </>
   )
 }
@@ -37,10 +37,4 @@ export default App
 
 
 
- 
-
-
-
-
- 
 

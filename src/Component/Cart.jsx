@@ -3,7 +3,7 @@ import { IoCartOutline } from "react-icons/io5";
 
 
 
-const Cart = ({ star, game, eye, heart, per, black, head, pera, peraa, pg, delet, showicon, show }) => {
+const Cart = ({ star, game, eye, heart, per, black, head, pera, peraa, pg, delet, showicon, show, }) => {
   return (
     <>
 
@@ -12,6 +12,7 @@ const Cart = ({ star, game, eye, heart, per, black, head, pera, peraa, pg, delet
           {show && (<div className='w-[55px] h-[26px] text-white text-center bg-[#DB4444] mt-[20px] ml-[20px]'>{per}</div>)}
           <div className='ml-[150px] mt-[20px]'>
             <img src={heart} alt="" />
+           
             <span>{delet}</span>
             <img src={eye} alt="" className='mt-[10px]' />
           </div>
@@ -34,6 +35,7 @@ const Cart = ({ star, game, eye, heart, per, black, head, pera, peraa, pg, delet
             <p className='text-gray-500'>{pg}</p>
           </div>
         </div>
+         
       </div>
 
     </>

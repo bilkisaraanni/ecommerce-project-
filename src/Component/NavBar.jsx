@@ -114,7 +114,7 @@ const Navbar = ({ showUser,hideIcon }) => {
                             Contact
                         </NavLink>
 
-                        <NavLink
+                        <NavLink to="/about"
                             className={navLinkClass}
                         >
                             About
@@ -124,6 +124,8 @@ const Navbar = ({ showUser,hideIcon }) => {
                             className={navLinkClass}>
                             Sign Up
                         </NavLink>
+
+                        
                     </ul>
                     <div className="hidden lg:flex  items-center gap-3">
                         <div className="flex items-center relative">

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import Shop from '../Component/Shop'
 
 const PageShop = () => {
