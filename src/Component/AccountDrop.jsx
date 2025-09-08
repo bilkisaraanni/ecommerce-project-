@@ -28,7 +28,7 @@ const AccountDrop = () => {
     return (
         <>
             <Container>
-                <Navbar showUser={true} />
+                {/* <Navbar showUser={true} /> */}
                 <Bannar />
                 <Today />
                 <Catagories />

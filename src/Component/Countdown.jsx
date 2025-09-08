@@ -4,7 +4,7 @@ import { countDownDateAndTime } from 'countdown-date-time';
 import { PiDotBold } from "react-icons/pi";
 
 const Countdown = ({ className, margin, showDot }) => {
-    const conduct_date = '2025-08-30 16:54:00';
+    const conduct_date = '2025-10-30 16:54:00';
     const [count, setCount] = useState({});
 
     useEffect(() => {

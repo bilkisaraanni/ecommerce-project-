@@ -20,7 +20,7 @@ const About = () => {
     return (
         <>
             <Container>
-                <Navbar />
+                {/* <Navbar /> */}
 
                 <div className='mt-10'>
                     <h3>Home / About</h3>

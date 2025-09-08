@@ -22,7 +22,7 @@ const Wishlist = () => {
   return (
     <>
       <Container>
-        <Navbar  showUser={true}/>
+        {/* <Navbar  showUser={true}/> */}
 
         <div className=''>
           <div className='flex justify-between mt-10'>

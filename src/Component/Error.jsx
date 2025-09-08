@@ -6,7 +6,7 @@ const Error = () => {
   return (
     <>
       <Container>
-        <Navbar />
+        {/* <Navbar /> */}
         <div className='mt-10'>
           <h3>Home / 404 Error</h3>
         </div>

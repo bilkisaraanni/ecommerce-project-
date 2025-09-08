@@ -9,7 +9,7 @@ const SignUp = () => {
   return (
     <>
       <Container>
-        <Navbar hideIcon={true}/>
+        {/* <Navbar hideIcon={true}/> */}
         <div className='mt-[140px] flex ' >
           <div className='absolute left-0 '>
             <img src={sideimg} alt="" className='h-[741px] hidden lg:block' />

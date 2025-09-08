@@ -12,11 +12,14 @@ const Pegination = ({ itemsPerPage, products }) => {
     function Items({ currentItems }) {
         return (
             <>
-                {currentItems &&
+                <div className='flex flex-wrap ml-[50px] mt-[30px] gap-6 '>
+                    {currentItems &&
                     currentItems.map((product,id) => {
                         return (
                             <ApiCart
+                                productDetails={product}
                                 key={id}
+                                id={product.id}
                                 img={product.thumbnail}
                                 discount={product.discountPercentage}
                                 title={product.title}
@@ -29,6 +32,8 @@ const Pegination = ({ itemsPerPage, products }) => {
                 }
 
                     )}
+                </div>
+
             </>
         );
     }
@@ -38,16 +43,14 @@ const Pegination = ({ itemsPerPage, products }) => {
 
 
     const endOffset = itemOffset + itemsPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    
     const currentItems = items.slice(itemOffset, endOffset);
     const pageCount = Math.ceil(items.length / itemsPerPage);
 
 
     const handlePageClick = (event) => {
         const newOffset = (event.selected * itemsPerPage) % items.length;
-        console.log(
-            `User requested page number ${event.selected}, which is offset ${newOffset}`
-        );
+        
         setItemOffset(newOffset);
     };
 

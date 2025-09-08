@@ -14,9 +14,11 @@ import ApiCart from './ApiCart';
 import Skeleton from './Skeleton';
 import Pegination from './Pegination';
 import axios from 'axios';
-import {  useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { productReducer, FilterReducer } from '../Slices/ProductSlice';
 import Product from './Product';
+import BreadCrumb from './BreadCrumb';
+
 
 
 
@@ -29,9 +31,11 @@ const Shop = () => {
     const [optionValue, setOptionValue] = useState(6)
     const [category, setCategory] = useState([]);
     const dispatch = useDispatch()
+
     
 
-   async function getAllProducts(){
+
+    async function getAllProducts() {
         let data = await axios.get('https://dummyjson.com/products');
         setProducts(data.data.products);
         dispatch(productReducer(data.data.products));
@@ -39,7 +43,7 @@ const Shop = () => {
     }
 
 
-   useEffect(() => {
+    useEffect(() => {
         // fetch("https://dummyjson.com/products")
         //     .then((res) => res.json())
         //     .then((data) => {
@@ -49,29 +53,44 @@ const Shop = () => {
         getAllProducts()
     }, []);
 
-    const handelFilter = (item) =>{
-        const filterProduct = products.filter((CItem)=> CItem.category == item);
-       dispatch(FilterReducer(filterProduct));
+    const handelFilter = (item) => {
+        const filterProduct = products.filter((CItem) => CItem.category == item);
+        dispatch(FilterReducer(filterProduct));
     }
 
-    useEffect(()=>{
-        const uniqueCategory = [...new Set(products.map((item)=>item.category))];
+    useEffect(() => {
+        const uniqueCategory = [...new Set(products.map((item) => item.category))];
         setCategory(uniqueCategory);
-    },[products])
+    }, [products])
+
+    const handleAllProduct = () => {
+        dispatch(productReducer(products));
+    }
 
 
     return (
         <>
             <Container>
-                <Navbar showUser={true} />
+                {/* <Navbar showUser={true} /> */}
+                <BreadCrumb />
+                 
                 <div className='flex mt-12'>
                     <div className='w-[25%px]'>
                         <h3 className='text-[20px] font-bold  w-[184px] mb-[15px]'>Shop by Category</h3>
+
+
                         <ul className='flex flex-col gap-y-4 mb-10'>
+                            <li
+                                onClick={handleAllProduct}
+                                className='capitalize cursor-pointer select-none'
+                            >All Products
+                            </li>
 
                             {
-                                category.map((item, id)=>(
-                                    <li key={id} onClick={()=>handelFilter(item)} className='capitalize cursor-pointer select-none'>{item}</li>
+                                category.map((item, id) => (
+                                    <li
+                                        key={id} onClick={() => handelFilter(item)} className='capitalize cursor-pointer select-none'>{item}
+                                    </li>
                                 ))
                             }
                             {/* <li><a href="#">Woman’s Fashion</a></li>
@@ -111,7 +130,7 @@ const Shop = () => {
                     <div className='w-[75%]'>
                         <div className='flex items-center gap-3 ml-[770px]'>
                             <span className=" ">Show :</span>
-                            
+
                             <select
                                 value={optionValue}
                                 onChange={(e) => setOptionValue(Number(e.target.value))}
@@ -122,13 +141,13 @@ const Shop = () => {
                             </select>
 
                         </div>
-                        <div className='flex flex-wrap ml-[50px] mt-[30px] gap-6 '>
+                        <div >
 
                             {
                                 loading ? (
 
                                     <div className='flex flex-wrap gap-6'>
-                                        {Array.from({length: optionValue}).map((_, idx) =>(
+                                        {Array.from({ length: optionValue }).map((_, idx) => (
                                             <Skeleton key={idx} />
                                         ))}
 
@@ -136,7 +155,7 @@ const Shop = () => {
 
                                 ) : (
 
-                                    <Pegination itemsPerPage={optionValue}  />
+                                    <Pegination itemsPerPage={optionValue} />
 
                                 )
                             }
@@ -251,7 +270,7 @@ const Shop = () => {
                             /> */}
                         </div>
 
-                        
+
                     </div>
                 </div>
 
@@ -263,98 +282,3 @@ const Shop = () => {
 
 export default Shop
 
-// import React, { useEffect, useState } from 'react';
-// import Container from './Container';
-
-// import star from '../assets/star.png'
-// import Btn from './Btn';
-// import Cart from './Cart';
-
-
-
-
-
-// const Shop = ({ product, src }) => {
-
-//     const [products, setProducts] = useState([]);
-//     const [Optionvalue, setOptionValue] = useState(6);
-
-//     useEffect(() => {
-//         fetch('https://dummyjson.com/products/search?q=phone')
-//             .then(response => response.json())
-//             .then(data => setProducts(data.products.slice(0, 9)))
-//             .catch(error => setProducts([]));
-//     }, []);
-
-//     return (
-//         <>
-//             <Container>
-//                 <div className='flex mt-12'>
-
-//                     <div className='w-[197px]'>
-//                         <h3 className='text-[20px] font-bold  mb-[15px] w-[184px]'>Shop by Category</h3>
-//                         <ul className='flex flex-col gap-y-4 mb-10'>
-//                             <li><a href="">Woman’s Fashion</a></li>
-//                             <li><a href="">Men’s Fashion</a></li>
-//                             <li><a href="">Electronics</a></li>
-//                             <li><a href="">Home & Lifestyle</a></li>
-//                             <li><a href="">Medicine</a></li>
-//                             <li><a href="">Sports & Outdoor</a></li>
-//                             <li><a href="">Baby’s & Toys</a></li>
-//                             <li><a href="">Groceries & Pets</a></li>
-//                             <li><a href="">Health & Beauty</a></li>
-//                         </ul>
-
-//                         <div>
-//                             <h3 className='text-[20px] font-bold mb-[15px]'>Shop by Color</h3>
-//                             <ul className='flex flex-col gap-y-4 mb-10'>
-//                                 <div className='flex items-center gap-2'>
-//                                     <div className='w-[11px] h-[11px] rounded-full bg-black'></div>
-//                                     <li><a href="">Color 1</a></li>
-//                                 </div>
-//                                 <div className='flex items-center gap-2'>
-//                                     <div className='w-[11px] h-[11px] rounded-full bg-[#FF0000]'></div>
-//                                     <li><a href="">Color 2</a></li>
-//                                 </div>
-//                                 <div className='flex items-center gap-2'>
-//                                     <div className='w-[11px] h-[11px] rounded-full bg-[#00FF38]'></div>
-//                                     <li><a href="">Color 3</a></li>
-//                                 </div>
-//                             </ul>
-//                         </div>
-//                     </div>
-
-//                     <div>
-//                         <div className='flex items-center gap-2  ml-[795px]'>
-//                             <h4 className='text-[16px]'>Show:</h4>
-//                             <select className='border border-gray-300 rounded-md px-7 py-1'>
-//                                 <option value="6">6</option>
-//                                 <option value="9">9</option>
-//                                 <option value="12">12</option>
-//                             </select>
-//                         </div>
-
-//                         <div className='grid grid-cols-3 ml-[107px] mt-15 gap-y-10 mb-[67px]'>
-//                             {products.map((item, index) => (
-//                                 <Cart
-//                                     key={index}
-//                                     product={item}
-
-//                                 />
-//                             ))}
-//                         </div>
-
-//                         <div className='flex gap-4 ml-[107px] mb-[104px]'>
-//                             <Btn />
-//                             <Btn />
-//                             <Btn />
-//                             <Btn />
-//                         </div>
-//                     </div>
-//                 </div>
-//             </Container>
-//         </>
-//     );
-// };
-
-// export default Shop;

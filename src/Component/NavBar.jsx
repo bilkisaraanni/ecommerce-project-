@@ -78,10 +78,14 @@ import { NavLink } from "react-router";
 import { FaBars } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
 import { FaRegUser } from "react-icons/fa";
+import { useSelector } from 'react-redux'
 
 
 
 const Navbar = ({ showUser,hideIcon }) => {
+
+    const cart = useSelector((state) => state.allProduct.cart);
+
     const [menuOpen, setMenuOpen] = useState(false);
 
     const Menu = () => {
@@ -139,9 +143,14 @@ const Navbar = ({ showUser,hideIcon }) => {
                             </div>
                         </div>
                         {!hideIcon  ? (<div className='block'>
-                            <div className="flex items-center gap-4 text-lg">
+                            <div className="flex items-center gap-4 text-2xl relative">
                                 <FaRegHeart />
-                                <MdOutlineShoppingCart />
+                                <NavLink to="/homecart">
+                                    <MdOutlineShoppingCart />
+                                    <div className='w-5 h-5 rounded-full bg-black text-white text-xs flex justify-center items-center absolute top-[-10px] right-[-12px]'>
+                                        {cart.length}
+                                    </div>
+                                </NavLink>
                                 {showUser && <FaRegUser />}
                             </div>
                         </div>) : (<div className='hidden'>

@@ -13,7 +13,7 @@ const CheckOut = () => {
     return (
         <>
             <Container>
-                <Navbar />
+                {/* <Navbar /> */}
                 <div className='mt-[80px]'>
                     <h4>Account/My Account/Product/View Cart/CheckOut</h4>
                 </div>

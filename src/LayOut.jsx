@@ -8,7 +8,7 @@ const LayOut = () => {
   return (
    <>
     <FirstPart/>
-    {/* <NavBar/> */}
+    <NavBar/>
     <Outlet/>
     <Exclusive/>
     

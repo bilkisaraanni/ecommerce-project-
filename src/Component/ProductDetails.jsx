@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import Container from './Container'
 import Navbar from './NavBar'
 import gamee1 from '../assets/gamee1.png'
@@ -16,70 +16,93 @@ import eye from '../assets/eye.png'
 import game from '../assets/game.png'
 import star from '../assets/star.png'
 import keyboat from '../assets/keyboat.png'
-import desktop from '../assets/desktop.png' 
-import box from '../assets/box.png' 
+import desktop from '../assets/desktop.png'
+import box from '../assets/box.png'
+import BreadCrumb from './BreadCrumb'
+import axios from 'axios';
+import { useParams } from "react-router";
+import Item from 'antd/es/list/Item';
+import {  Rate } from 'antd';
 
 
 
 
 const ProductDetails = () => {
+
+    const {id} =  useParams();
+
+    const [products, setProducts] = useState([]);
+    const [productImages, setProductimges] = useState([]);
+
+    async function getAllProducts() {
+        let data = await axios.get(`https://dummyjson.com/products/${id}`);
+        setProducts(data.data);
+        setProductimges(data.data.images)
+        
+    }
+    useEffect(() => {
+
+        getAllProducts()
+    }, []);
+
     return (
         <>
             <Container>
-                <Navbar />
+                {/* <Navbar /> */}
+                <BreadCrumb />
                 <div className='mt-10 '>
                     <h3>Account/ Gaming / Havic HV G-92 Gamepad</h3>
                 </div>
 
+                
+
                 <div className='flex gap-6 mt-10'>
-                    <div className=' space-y-4'>
-                        <img src={gamee1} alt="" />
+
+                    <div className='flex'>
+                    <div className='flex flex-wrap w-[20%]'>
+                        {productImages.map((item) => <img src={item} alt="" />)}
+                        {/* <img src={gamee1} alt="" />
                         <img src={gamee2} alt="" />
                         <img src={gamee3} alt="" />
-                        <img src={gamee4} alt="" />
+                        <img src={gamee4} alt="" /> */}
                     </div>
 
-                    <div className=''>
-                        <img src={gamee} alt="" />
+                    <div className=' w-[80%]'>
+                        <img src={products.thumbnail} alt="" />
+                    </div>
                     </div>
 
                     <div>
                         <div>
-                            <h2 className='font-Poppins font-bold text-[28px] ml-[18px]'>Havic HV G-92 Gamepad</h2>
+                            <h2 className='font-Poppins font-bold text-[28px] ml-[18px]'>{products.title}</h2>
                         </div>
 
                         <div className='mt-4 flex  ml-[18px] gap-6'>
-                            <div className='flex gap-2 text-[#FFAD33]'>
-                                <IoStar />
-                                <IoStar />
-                                <IoStar />
-                                <IoStar />
-                                <div>
-                                    <IoStar className='text-[#807b7b]' />
-                                </div>
-                            </div>
+                            
+                               <Rate value={products.rating} />
+                            
 
                             <div className='border-r-2  border-[#807b7b]  flex mt-[-18px] p-3'>
-                                <h3 className='text-[#807b7b] font-Poppins text-[14px] mt-[5px]'>(150 Reviews)</h3>
+                                <h3 className='text-[#807b7b] font-Poppins text-[14px] mt-[5px]'>{products.review}</h3>
                             </div>
                             <div className='mt-[-2px]'>
                                 <h3 className='text-[#00FF66] font-Poppins text-[14px]'>In Stock</h3>
                             </div>
                         </div>
                         <div className='border-b-2 border-[#807b7b] p-2 '>
-                            <h3 className='text-[24px]'>$192.00</h3>
-                            <p className='mt-4'>PlayStation 5 Controller Skin High quality vinyl with air <br /> channel adhesive for easy bubble free install & mess <br /> free removal Pressure sensitive.</p>
+                            <h3 className='text-[24px]'> ${products.price}</h3>
+                            <p className='mt-4'> {products.description}</p>
                         </div>
 
                         <div className="flex items-center gap-4 p-4">
                             <span className="text-[20px] ">Colours:</span>
 
-                            {/* Selected (blue) color */}
+                            
                             <div className="w-6 h-6 rounded-full border-2 border-black flex items-center justify-center">
                                 <div className="w-4 h-4 rounded-full bg-blue-300" />
                             </div>
 
-                            {/* Not selected (red) color */}
+                            
                             <div className="w-6 h-6 rounded-full bg-rose-500" />
                         </div>
 
@@ -108,15 +131,15 @@ const ProductDetails = () => {
                             </div>
 
                             <div className="flex items-center justify-between border border-gray-300 rounded-md overflow-hidden w-max text-lg font-medium mt-4">
-                                {/* Minus button */}
+                               
                                 <button className="w-10 h-10 border-r border-[#807b7b] hover:bg-[#DB4444]">−</button>
 
-                                {/* Quantity number */}
+                                
                                 <div className="w-10 h-10 flex items-center justify-center hover:bg-[#DB4444]">
                                     2
                                 </div>
 
-                                {/* Plus button */}
+                                
                                 <button className="w-10 h-10 hover:bg-[#DB4444] text-white rounded-r-md">
                                     +
                                 </button>
@@ -134,7 +157,7 @@ const ProductDetails = () => {
                             <div className='w-[420px] h-[180px] border-2 border-[#807b7b] mt-6'>
                                 <div className='flex gap-6 mt-4  border-b-2 w-[420px] border-[#807b7b] pb-4'>
                                     <div className='mt-[10px]'>
-                                        <img src={bus} alt="" className='ml-[10px]'/>
+                                        <img src={bus} alt="" className='ml-[10px]' />
                                     </div>
                                     <div className='space-y-1 border-b-2  border-[#807b7b]'>
                                         <h3 className='font-medium text-[16px]'>Free Delivery</h3>
@@ -144,7 +167,7 @@ const ProductDetails = () => {
 
                                 <div className='flex gap-6 mt-4 '>
                                     <div className='mt-[10px] '>
-                                        <img src={round} alt=""  className='ml-[10px]'/>
+                                        <img src={round} alt="" className='ml-[10px]' />
                                     </div>
                                     <div className='space-y-1 '>
                                         <h3 className='font-medium text-[16px]'>Return Delivery</h3>

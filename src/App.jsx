@@ -18,7 +18,7 @@ function App() {
 
   return (
     <>
-     <Navbar/>
+     {/* <Navbar/> */}
      <Bannar/>
      <Today/>
      <Catagories/>

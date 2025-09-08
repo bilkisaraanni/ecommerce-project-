@@ -1,20 +1,33 @@
-import React from 'react'
-import Container from './Container'
+import React, {useState} from 'react'
 import smmonitor from '../assets/smmonitor.png'
-import crossicon from '../assets/crossicon.png'
+
 import gamepad from '../assets/gamepad.png'
 import Navbar from './NavBar'
+import { useSelector } from 'react-redux'
+import Container from './Container'
+import BreadCrumb from './BreadCrumb'
+import Item from 'antd/es/list/Item'
+import CartItem from './CartItem'
 
 
 const HomeCart = () => {
+   const [quantity, setQuantity] = useState(1);
+
+  const handleQuantityChange = (e) => {
+    setQuantity(Number(e.target.value));
+  };
+
+  
+  const cartdata = useSelector((state) => state.allProduct.cart);
+  
   return (
     <>
 
       <Container>
-        <Navbar  showUser={true}/>
+        {/* <Navbar showUser={true} /> */}
         <div>
           <div className='mt-10'>
-            <h1>Home / Cart</h1>
+            <BreadCrumb />
           </div>
           <div className='mt-[80px] flex justify-between items-center px-10'>
             <h3>Product</h3>
@@ -24,30 +37,29 @@ const HomeCart = () => {
 
           </div>
 
-          <div className='mt-10 flex justify-between items-center px-10'>
-            <div className='flex gap-2 items-center' >
-              <div className='relative '>
-                <img src={smmonitor} alt="" />
-                <img src={crossicon} alt="" className='absolute -top-1 -left-1' />
-              </div>
-              <div>
-                <h3>LCD Monitor</h3>
-              </div>
-            </div>
+         
 
-            <div className='ml-[-120px]'>
-              <h4>$650</h4>
-            </div>
-            <div className=''>
-              <input type="number" placeholder='01' className='w-[72px] h-[44px] border-[1px] border-[#E5E5E5] p-2 ml-[-10px]' />
-            </div>
+             {
+              cartdata.map((item,id)=>{
+                return(
+                    <CartItem
+                    index={id}
+                    quan={item.quan}
+                    key={id}
+                    id={item.id}
+                    img={item.thumbnail}
+                    titel={item.title}
+                    price={item.price}
+                    discountprice={Math.floor(Item.price / (1 - Item.discountPercentage / 100))}
+                    />
+                )
+              })
+             }
 
-            <div>
-              <h3>$650</h3>
-            </div>
-          </div>
 
-          <div className='mt-10 flex justify-between items-center px-10'>
+
+
+          {/* <div className='mt-10 flex justify-between items-center px-10'>
             <div className='flex gap-2 items-center' >
               <div className='relative '>
                 <img src={gamepad} alt="" />
@@ -67,7 +79,7 @@ const HomeCart = () => {
             <div>
               <h3>$1100</h3>
             </div>
-          </div>
+          </div> */}
 
           <div className='mt-[50px] flex justify-between  '>
             <div>
@@ -83,7 +95,7 @@ const HomeCart = () => {
             <div className='flex gap-3'>
               <input type="text" placeholder='Coupon Code' className='w-[300px] h-[56px] border-[1px] border-[#BFBFBF] p-6' />
               <button className='w-[211px] h-[56px]  bg-[#DB4444] text-white text-center text-1xl rounded-[4px]'>Apply Coupon</button>
-              
+
             </div>
 
             <div className='w-[470px] h-[324px] border-1 '>
@@ -104,10 +116,10 @@ const HomeCart = () => {
                   <h3 className='text-[16px] font-Poppins'>$1750</h3>
                 </div>
                 <div className='text-center'>
-                <button className='w-[260px] h-[56px]  bg-[#DB4444] text-white text-center text-1xl text-[16px]  font-Poppins rounded-[4px]'>Procees to checkout</button>
+                  <button className='w-[260px] h-[56px]  bg-[#DB4444] text-white text-center text-1xl text-[16px]  font-Poppins rounded-[4px]'>Procees to checkout</button>
+                </div>
               </div>
-              </div>
-              
+
             </div>
           </div>
         </div>

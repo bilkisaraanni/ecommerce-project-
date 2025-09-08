@@ -6,7 +6,7 @@ const AccountHome = () => {
     return (
         <>
             <Container>
-                <Navbar />
+                {/* <Navbar /> */}
 
                 <div className='flex gap-10'>
                     <div>

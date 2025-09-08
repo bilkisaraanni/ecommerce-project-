@@ -8,7 +8,7 @@ const Contact = () => {
     return (
         <>
             <Container>
-                <Navbar />
+                {/* <Navbar /> */}
                 <div className='mt-10'>
                     <h3>Home / Contact</h3>
                 </div>

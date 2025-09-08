@@ -97,15 +97,7 @@ const Today = () => {
 
                     <Countdown showDot={true} />
                 </div>
-               {/* <div className='flex gap-6 items-center'>
-                <TopHead
-                  subTitle="Featured"
-                  Title="New Arrival"
-                  className="mt-20"
-                />
-                <Countdown showDot={true} className="" />
-               </div> */}
-
+              
 
 
 
