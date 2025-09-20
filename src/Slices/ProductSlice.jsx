@@ -3,7 +3,13 @@ import Product from '../Component/Product'
 
 const initialState = {
   product: null,
-    cart: localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [],
+    cart: 
+    localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) 
+    : [],
+    whishlist: 
+    localStorage.getItem('whishlist') ? JSON.parse(localStorage.getItem('whishlist')) 
+    : [],
+    subTotal: 0
 }
 
 export const ProductSlice = createSlice({
@@ -24,8 +30,6 @@ export const ProductSlice = createSlice({
       if(findindex == -1){
          state.cart = [...state.cart, action.payload];
          localStorage.setItem('cart', JSON.stringify([...state.cart])); 
-      }else{
-        // console.log("data ase")
       }
       
     },
@@ -36,21 +40,37 @@ export const ProductSlice = createSlice({
       
     },
 
-    // WishlistReducer: (state, action) => {
-    //   state.cart.splice(action.payload.id,1)
-    // },
+    wishlistReducer:  (state, action) => {
+      const findindex = state.cart.findIndex((item)=> item.id == action.payload.id)
+
+      if(findindex == -1){
+         state.whishlist = [...state.whishlist, action.payload];
+         localStorage.setItem('whishlist', JSON.stringify([...state.whishlist])); 
+      }
+      
+    },
+    
 
      QuentityUpdate: (state, action) => {
-      
+      const item = state.cart[action.payload.id];
       if(action.payload.actionname == "increment") {
-          state.cart[action.payload.id].quan++
+          item.quan++
           localStorage.setItem('cart', JSON.stringify([...state.cart]));
       }else{
-         state.cart[action.payload.id].quan--;
+         if (item.quan > 1) {
+          item.quan--;
           localStorage.setItem('cart', JSON.stringify([...state.cart]));
+         }
+          
       }
     },
+    
+    SubTotalReducer:(state)=>{
+      state.subTotal = state.cart.reduce((intial, item) => 
+         intial + item.quan  * item.price,0
+      )
 
+    }
 
 
     
@@ -58,6 +78,6 @@ export const ProductSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { productReducer, FilterReducer,CartReducer,RemoveCartReducer,WishlistReducer,QuentityUpdate} = ProductSlice.actions
+export const { productReducer, FilterReducer,CartReducer,RemoveCartReducer,wishlistReducer,QuentityUpdate, SubTotalReducer} = ProductSlice.actions
 
 export default ProductSlice.reducer

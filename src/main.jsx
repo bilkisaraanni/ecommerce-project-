@@ -20,6 +20,8 @@ import PageError from './Pages/PageError.jsx';
 import PageProduct from './Pages/PageProduct.jsx';
 import {store} from './store.jsx'
 import { Provider } from 'react-redux'
+import { ToastContainer} from 'react-toastify';
+
 
 const router = createBrowserRouter([
   {
@@ -104,6 +106,7 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
      <Provider store={store}>
+      <ToastContainer />
      <RouterProvider router={router} />
     </Provider>,
      

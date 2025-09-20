@@ -12,13 +12,17 @@ import desktop from '../assets/desktop.png'
 import game from '../assets/game.png'
 import keyboat from '../assets/keyboat.png'
 import { MdOutlineRemoveRedEye } from "react-icons/md";
-import Navbar from './NavBar';
+// import Navbar from './NavBar';
+import { useSelector } from 'react-redux'
+import ApiCart from './ApiCart';
 
 
 
 
 
 const Wishlist = () => {
+  const whishlist = useSelector((state) => state.allProduct.whishlist);
+  
   return (
     <>
       <Container>
@@ -31,7 +35,24 @@ const Wishlist = () => {
           </div>
 
           <div className='mt-[60px] flex gap-6'>
-            <Cart
+
+            {whishlist.map((item, id) => {
+              return (
+                <ApiCart
+                  
+                  key={id}
+                  id={item.id}
+                  img={item.thumbnail}
+                  discount={item.discountPercentage}
+                  title={item.title}
+                  price={item.price}
+                  discountprice={Math.floor(item.price / (1 - item.discountPercentage / 100))}
+                  rating={item.rating}
+                  stock={item.stock}
+                />
+              );
+            })}
+            {/* <Cart
               per="-35%"
               delet={<RiDeleteBinLine />}
               showicon={true}
@@ -74,17 +95,17 @@ const Wishlist = () => {
               head="Quilted Satin Jacket"
               pera="$960"
               peraa="$1160"
-            />
+            /> */}
           </div>
 
           <div className='flex gap-6 '>
             <div className='w-[20px] h-[40px] bg-[#DB4444] mt-[170px] rounded-[4px]  '>
             </div>
             <div className=' font-semibold text-[16px] mt-[180px]'>Just For You</div>
-           
+
           </div>
           <div className='ml-[980px] mt-[-50px]'>
-             <button className='px-4 py-2 border-1'>See All</button>
+            <button className='px-4 py-2 border-1'>See All</button>
           </div>
 
           <div className='flex gap-6 mt-[80px]'>
@@ -100,11 +121,11 @@ const Wishlist = () => {
               peraa="$1160"
               star={star}
               pg="(88)"
-             
+
             />
 
-             <Cart
-              
+            <Cart
+
               delet={<MdOutlineRemoveRedEye />}
               showicon={true}
               game={desktop}
@@ -113,12 +134,12 @@ const Wishlist = () => {
               pera="$1160"
               star={star}
               pg="(88)"
-              
-             
+
+
             />
 
-             <Cart
-              
+            <Cart
+
               delet={<MdOutlineRemoveRedEye />}
               showicon={true}
               game={game}
@@ -127,12 +148,12 @@ const Wishlist = () => {
               pera="$560"
               star={star}
               pg="(88)"
-             
-             
+
+
             />
 
-             <Cart
-              
+            <Cart
+
               delet={<MdOutlineRemoveRedEye />}
               showicon={true}
               game={keyboat}
@@ -141,8 +162,8 @@ const Wishlist = () => {
               pera="$200"
               star={star}
               pg="(88)"
-              
-             
+
+
             />
           </div>
 

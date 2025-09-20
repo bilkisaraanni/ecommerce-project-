@@ -4,7 +4,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { Flex, Rate } from 'antd';
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from 'react-redux'
-import { CartReducer } from "../Slices/ProductSlice"
+import { CartReducer, SubTotalReducer, wishlistReducer } from "../Slices/ProductSlice"
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 
 
@@ -24,7 +24,7 @@ const ApiCart = ({ img, discount, title, price, discountprice, rating, stock, id
         param == undefined
             ? toast.success('success add to cart', {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: false,
                 pauseOnHover: true,
@@ -51,13 +51,19 @@ function handleAddCart(e) {
     dispatch(CartReducer({ ...productDetails, quan: 1 }));
     const matchItem = data.find((item) => item.id == id)
     notify(matchItem);
+    dispatch(SubTotalReducer())
     
 }
+
+function handleWishlist() {
+     dispatch(wishlistReducer(productDetails));
+}
+
 
 return (
     <>
         <div >
-            <ToastContainer />
+            
             <div className='group relative   w-[230px] h-[250px] bg-[#F5F5F5] overflow-hidden'>
                 <img src={img} onClick={handelProductDetails} alt="" className='max-h-full object-contain mix-blend-multiply p-2 mx-auto w-[180px] pt-7' />
 
@@ -71,7 +77,7 @@ return (
                 </div>
                 <div className='absolute top-[12px] right-[12px] '>
                     <div className='bg-[#ffffff] w-8 h-8 rounded-full mx-auto grid place-items-center'>
-                        <FaRegHeart />
+                        <FaRegHeart onClick={handleWishlist} className='cursor-pointer'/>
                     </div>
                     <div className='bg-[#ffffff] w-8 h-8 rounded-full mx-auto grid place-items-center mt-2'>
                         <FaEye />

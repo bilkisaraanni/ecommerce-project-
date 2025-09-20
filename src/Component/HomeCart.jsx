@@ -18,7 +18,9 @@ const HomeCart = () => {
   };
 
   
-  const cartdata = useSelector((state) => state.allProduct.cart);
+  const cartdata = useSelector((state) => state.allProduct.cart);     
+  const subtotal = useSelector((state) => state.allProduct.subTotal);  
+   
   
   return (
     <>
@@ -105,7 +107,7 @@ const HomeCart = () => {
                 </div>
                 <div className='flex justify-between border-b-1 border-[#D8D8D8D8] pb-2'>
                   <h3 className='text-[16px] font-Poppins'>Subtotal:</h3>
-                  <h3 className='text-[16px] font-Poppins'>$1750</h3>
+                  <h3 className='text-[16px] font-Poppins'>${Number(subtotal).toFixed(2)}</h3>
                 </div>
                 <div className='flex justify-between border-b-1 border-[#D8D8D8D8] pb-2 mt-4'>
                   <h3 className='text-[16px]  font-Poppins'>Shipping:</h3>
@@ -113,7 +115,7 @@ const HomeCart = () => {
                 </div>
                 <div className='flex justify-between  pb-6 mt-4'>
                   <h3 className='text-[16px]  font-Poppins'>Total:</h3>
-                  <h3 className='text-[16px] font-Poppins'>$1750</h3>
+                  <h3 className='text-[16px] font-Poppins'>${Number(subtotal).toFixed(2)}</h3>
                 </div>
                 <div className='text-center'>
                   <button className='w-[260px] h-[56px]  bg-[#DB4444] text-white text-center text-1xl text-[16px]  font-Poppins rounded-[4px]'>Procees to checkout</button>

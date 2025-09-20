@@ -144,7 +144,10 @@ const Navbar = ({ showUser,hideIcon }) => {
                         </div>
                         {!hideIcon  ? (<div className='block'>
                             <div className="flex items-center gap-4 text-2xl relative">
-                                <FaRegHeart />
+                                 <NavLink to="/wishlist">
+                                 <FaRegHeart />
+                                 </NavLink>
+                                
                                 <NavLink to="/homecart">
                                     <MdOutlineShoppingCart />
                                     <div className='w-5 h-5 rounded-full bg-black text-white text-xs flex justify-center items-center absolute top-[-10px] right-[-12px]'>

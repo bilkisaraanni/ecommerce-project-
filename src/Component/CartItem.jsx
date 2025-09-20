@@ -1,7 +1,7 @@
 import React from 'react'
 import crossicon from '../assets/crossicon.png'
 import { useDispatch } from 'react-redux'
-import { RemoveCartReducer,QuentityUpdate } from '../Slices/ProductSlice'
+import { RemoveCartReducer,QuentityUpdate, SubTotalReducer } from '../Slices/ProductSlice'
 import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 
@@ -21,10 +21,12 @@ const CartItem = ({ img, titel, price,  id, quan , index}) => {
 
   function handelIncrement() {
     dispatch(QuentityUpdate({ id:index, quan, actionname: "increment"}));
+    dispatch(SubTotalReducer());
   }
 
   function handleDectement() {
     dispatch(QuentityUpdate({ id:index, quan, actionname: "Decrement"}));
+     dispatch(SubTotalReducer());
   }
   
 
@@ -62,7 +64,7 @@ const CartItem = ({ img, titel, price,  id, quan , index}) => {
           </div>
 
           <div>
-            <h3> {quan * price}</h3>
+            <h3> {Number(quan * price).toFixed(2)}</h3>
           </div>
         </div>
       </div>
